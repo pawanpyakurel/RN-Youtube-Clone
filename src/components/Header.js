@@ -3,12 +3,13 @@ import React from 'react';
 //styles
 import { StyleSheet, Text, View } from 'react-native';
 import { Colors} from "../../config/Theme"
+
 //icons
 import { AntDesign, Ionicons, MaterialIcons} from '@expo/vector-icons'; 
 
 import Constant from 'expo-constants';
 
-export default function Header() {
+const Header =()=>{
   return (
     <View style={styles.Header}>
       <View style = {styles.HeaderTopLeft}>
@@ -47,6 +48,8 @@ export default function Header() {
   );
 }
 
+export default Header;
+
 const styles = StyleSheet.create({
   Header: {
     height: 45,
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 1.0,
 
-    
+
   },
   HeaderTopLeft:{
     flexDirection : "row",
