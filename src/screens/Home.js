@@ -1,19 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-//components
-import Home from "./src/screens/Home"
+import Header from '../components/Header';
 
-export default function App() {
+export default function Home() {
   return (
-    <View style={styles.HomeWrapper}>
-      <Home />
+    <View style={styles.Home}>
+      <Header />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  HomeWrapper: {
+  Home: {
     flex: 1,
   },
 });
