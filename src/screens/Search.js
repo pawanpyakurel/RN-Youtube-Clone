@@ -1,13 +1,35 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, FlatList, ActivityIndicator} from 'react-native';
 
 import { Colors} from "../../config/Theme";
+import MiniCard from "../components/MiniCard"
 
 //icons
 import { Ionicons} from '@expo/vector-icons'; 
 
+// request api
+//GET https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=songs&type=video&key=AIzaSyDrtyVHd2imaaDDUh8NRRtQ-1AQF1TJkmM
+//GET https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=top%20nepali%20bowlers&key=[YOUR_API_KEY]
+
+
+//api key
+// AIzaSyDrtyVHd2imaaDDUh8NRRtQ-1AQF1TJkmM
+
+
 const SearchScreen = () =>{
-    const[value, setValue] = useState("")
+    const [value,setValue] = useState("")
+    const [miniCardData,setMiniCardData] = useState([])
+    const [loading, setLoading] = useState(false)
+    
+    const fetchData = () =>{
+        setLoading(true)
+        fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=AIzaSyDrtyVHd2imaaDDUh8NRRtQ-1AQF1TJkmM`)
+        .then(res =>res.json())
+        .then(data=>{
+            setMiniCardData(data.items)
+            setLoading(false)
+        })
+    }
     return(
         <View style = {styles.SearchScreen}>
             <View style = {styles.SearchScreenWrapper}>
@@ -17,17 +39,39 @@ const SearchScreen = () =>{
                     color={Colors.BrightBlack}
                 />
                 <TextInput 
-                    value ={`${value}`}
-                    onChange ={(text)=> setValue(`${text}`)}
+                    value ={value}
+                    onChangeText ={(text) => setValue(text)}
                     style = {styles.SearchText}
+                    onSubmitEditing ={()=>fetchData()}
                 />
                 <Ionicons  
                     name="md-send" 
                     size={32} 
                     color={Colors.BrightBlack}
+                    onPress={()=>fetchData()}
                 />
+                
             </View>
-
+            {
+                loading && (
+                    <ActivityIndicator 
+                        style = {styles.SearchScreenLoder}
+                        size = "large" 
+                        color ="red"
+                    />
+                )
+            }
+            <FlatList
+                data={miniCardData}
+                renderItem ={({item})=>{
+                    return <MiniCard 
+                        videoId ={item.id.videoId}
+                        title ={item.snippet.title}
+                        channel ={item.snippet.channelTitle}
+                    />
+                }}
+                keyExtractor={item => item.id.videoId}
+            />
         </View>
     )
 }
@@ -57,6 +101,10 @@ const styles = StyleSheet.create({
     SearchText:{
         width: "70%",
         backgroundColor: Colors.TextInputBackground,
+    },
+
+    SearchScreenLoder:{
+        marginTop: 10,
     }
   });
   
