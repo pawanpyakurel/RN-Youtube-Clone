@@ -3,20 +3,12 @@ import { StyleSheet, Text, View, ScrollView, TextInput, FlatList, ActivityIndica
 
 import { Colors} from "../../config/Theme";
 import MiniCard from "../components/MiniCard"
+import Constant from 'expo-constants';
 
 //icons
 import { Ionicons} from '@expo/vector-icons'; 
 
-// request api
-//GET https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=songs&type=video&key=AIzaSyDrtyVHd2imaaDDUh8NRRtQ-1AQF1TJkmM
-//GET https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=top%20nepali%20bowlers&key=[YOUR_API_KEY]
-
-
-//api key
-// AIzaSyDrtyVHd2imaaDDUh8NRRtQ-1AQF1TJkmM
-
-
-const SearchScreen = () =>{
+const SearchScreen = ({navigation}) =>{
     const [value,setValue] = useState("")
     const [miniCardData,setMiniCardData] = useState([])
     const [loading, setLoading] = useState(false)
@@ -37,6 +29,7 @@ const SearchScreen = () =>{
                     name="md-arrow-back" 
                     size={32} 
                     color={Colors.BrightBlack}
+                    onPress= {()=> navigation.goBack()}
                 />
                 <TextInput 
                     value ={value}
@@ -81,6 +74,7 @@ export default SearchScreen;
 const styles = StyleSheet.create({
     SearchScreen: {
       flex: 1,
+      marginTop: Constant.statusBarHeight,
     },
 
     SearchScreenWrapper:{

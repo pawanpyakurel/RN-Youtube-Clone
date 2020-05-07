@@ -9,7 +9,7 @@ const MiniCard = (props) =>{
         <View style = {styles.MiniCard}>
             <Image
                 source = {
-                    {uri: `https://i.ytimg.com/vi/${props.videoId}/hqdefault.jpg`}
+                    {uri: `https://i.ytimg.com/vi/${props.videoId}/mqdefault.jpg`}
                 }
                 style = {styles.MiniCardBackground}
             />
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
 
     MiniCardBottomText:{
         fontSize: 13,
+        width: (Dimensions.get("screen").width)/ 2.3,
     },
 
     MiniCardDot:{

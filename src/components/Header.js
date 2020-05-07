@@ -8,8 +8,10 @@ import { Colors} from "../../config/Theme"
 import { AntDesign, Ionicons, MaterialIcons} from '@expo/vector-icons'; 
 
 import Constant from 'expo-constants';
+import { useNavigation } from '@react-navigation/native';
 
 const Header =()=>{
+  const navigation = useNavigation();
   return (
     <View style={styles.Header}>
       <View style = {styles.HeaderTopLeft}>
@@ -36,6 +38,7 @@ const Header =()=>{
             name="md-search" 
             size={32} 
             color={Colors.BrightBlack}
+            onPress ={()=> navigation.navigate("search")}
         />
         <MaterialIcons  
         // style = {styles.HeaderTopLeftIcon} 

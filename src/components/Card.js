@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 
     CardBackground:{
         width: "100%",
-        height: 200,
+        height: 190,
     },
 
     CardInfoWrapper :{
