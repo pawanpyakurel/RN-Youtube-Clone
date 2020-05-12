@@ -8,19 +8,31 @@ import Constant from 'expo-constants';
 //icons
 import { Ionicons} from '@expo/vector-icons'; 
 
+//redux
+import {useSelector, useDispatch} from 'react-redux'
+
 const SearchScreen = ({navigation}) =>{
     const [value,setValue] = useState("")
-    const [miniCardData,setMiniCardData] = useState([])
+    // const [miniCardData,setMiniCardData] = useState([])
+    const miniCardData = useSelector (state =>{
+        return state
+    })
+    const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
     
     const fetchData = () =>{
+        const key = `AIzaSyDrtyVHd2imaaDDUh8NRRtQ-1AQF1TJkmM`,
+              key1 = `AIzaSyD-zeRJrZA83oeIkCnNmtZ0x8vASF2HbYk`;
         setLoading(true)
-        fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=AIzaSyDrtyVHd2imaaDDUh8NRRtQ-1AQF1TJkmM`)
+        fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=${key1}`)
         .then(res =>res.json())
         .then(data=>{
-            setMiniCardData(data.items)
+            // setMiniCardData(data.items)
+            dispatch({type: "add", payload: data.items})
             setLoading(false)
+            
         })
+        // console.log("Submitted")
     }
     return(
         <View style = {styles.SearchScreen}>

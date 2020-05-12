@@ -15,6 +15,14 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {MaterialIcons} from '@expo/vector-icons';
 
+//redux
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import Reducer from './src/reducers/reducer'
+
+//store
+const store = createStore(Reducer);
+
 const Stack =createStackNavigator();
 const Tabs =createBottomTabNavigator();
 
@@ -49,13 +57,15 @@ const RootHome =() =>{
 }
 const App =() => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator headerMode ="none">
-        <Stack.Screen name ="rootHome" component ={RootHome}/>
-        <Stack.Screen name ="search" component ={SearchScreen}/>
-        <Stack.Screen name ="videoPlayer" component ={VideoPlayer}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator headerMode ="none">
+          <Stack.Screen name ="rootHome" component ={RootHome}/>
+          <Stack.Screen name ="search" component ={SearchScreen}/>
+          <Stack.Screen name ="videoPlayer" component ={VideoPlayer}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

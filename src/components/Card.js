@@ -7,12 +7,12 @@ import { Colors} from "../../config/Theme";
 //icons
 import {MaterialIcons} from '@expo/vector-icons'; 
 
-const Card = () => {
+const Card = (props) => {
     return (
         <View style = {styles.Card}>
             <Image
                 source = {
-                    {uri: "https://images.unsplash.com/photo-1496715976403-7e36dc43f17b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"}
+                    {uri: `https://i.ytimg.com/vi/${props.videoId}/hqdefault.jpg`}
                 }
                 style = {styles.CardBackground}
             />
@@ -28,10 +28,10 @@ const Card = () => {
                         ellipsizeMode = "tail"
                         numberOfLines = {2}
                     >
-                        IF YOU LAUGH YOU LOSE | ULTIMATE FUNNY FAILS COMPILATION 2019 | IF YOU LAUGH YOU LOSE | ULTIMATE FUNNY FAILS COMPILATION 2019 
+                       {props.title}
                     </Text>
                     <Text style = {styles.CardBottomText}>
-                        This is Amazing Image
+                        {props.channel}
                     </Text>
                 </View>
             </View>
