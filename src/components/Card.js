@@ -1,41 +1,45 @@
 import React from 'react';
 
 //styles
-import { StyleSheet, Text, View, Image, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity} from 'react-native';
 import { Colors} from "../../config/Theme";
+import { useNavigation} from '@react-navigation/native'
 
 //icons
 import {MaterialIcons} from '@expo/vector-icons'; 
 
 const Card = (props) => {
+    const navigation = useNavigation();
     return (
-        <View style = {styles.Card}>
-            <Image
-                source = {
-                    {uri: `https://i.ytimg.com/vi/${props.videoId}/hqdefault.jpg`}
-                }
-                style = {styles.CardBackground}
-            />
-            <View style = {styles.CardInfoWrapper}>
-                <MaterialIcons  
-                    name="account-circle" 
-                    size={50} 
-                    color= {Colors.BrightBlack}
+        <TouchableOpacity onPress ={()=> navigation.navigate("videoPlayer", {videoId:props.videoId, title: props.title})}> 
+            <View style = {styles.Card} >
+                <Image
+                    source = {
+                        {uri: `https://i.ytimg.com/vi/${props.videoId}/hqdefault.jpg`}
+                    }
+                    style = {styles.CardBackground}
                 />
-                <View style = {styles.CardInfoText}> 
-                    <Text 
-                        style = {styles.CardTopText}
-                        ellipsizeMode = "tail"
-                        numberOfLines = {2}
-                    >
-                       {props.title}
-                    </Text>
-                    <Text style = {styles.CardBottomText}>
-                        {props.channel}
-                    </Text>
+                <View style = {styles.CardInfoWrapper}>
+                    <MaterialIcons  
+                        name="account-circle" 
+                        size={50} 
+                        color= {Colors.BrightBlack}
+                    />
+                    <View style = {styles.CardInfoText}> 
+                        <Text 
+                            style = {styles.CardTopText}
+                            ellipsizeMode = "tail"
+                            numberOfLines = {2}
+                        >
+                        {props.title}
+                        </Text>
+                        <Text style = {styles.CardBottomText}>
+                            {props.channel}
+                        </Text>
+                    </View>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
         
     )
 

@@ -22,11 +22,14 @@ const SearchScreen = ({navigation}) =>{
     
     const fetchData = () =>{
         const key = `AIzaSyDrtyVHd2imaaDDUh8NRRtQ-1AQF1TJkmM`,
-              key1 = `AIzaSyD-zeRJrZA83oeIkCnNmtZ0x8vASF2HbYk`;
+              key1 = `AIzaSyD-zeRJrZA83oeIkCnNmtZ0x8vASF2HbYk`,
+              key3 = `AIzaSyDZkkvc0NQzFv4tE3S3dBoR9h1TwkVODGA`,
+              key4 = `AIzaSyD9NQkpie-cOm43gLDrbjcoSv372K-16Bc`;
         setLoading(true)
-        fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=${key1}`)
+        fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=AIzaSyCn6CV6kn0ebchrSKBMicCzI9fz8fMfZcY`)
         .then(res =>res.json())
         .then(data=>{
+            // console.log(data)
             // setMiniCardData(data.items)
             dispatch({type: "add", payload: data.items})
             setLoading(false)

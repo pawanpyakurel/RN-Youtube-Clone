@@ -26,8 +26,7 @@ const Home = () => {
           )
         }}
         keyExtractor={item => item.id.videoId}
-      >
-      </FlatList>
+      />
     </View>
   );
 }
